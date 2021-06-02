@@ -7,10 +7,15 @@ object RetrofitInstance {
 
     private const val BASE_URL = "https://rickandmortyapi.com/api/"
 
-    fun getInstance() : Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+    private val retrofit: Retrofit =
+        Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
+    private val rickMortyAPI = retrofit.create(RetrofitService::class.java)
+
+    fun getMortyAPI(): RetrofitService? {
+        return rickMortyAPI
     }
 }
