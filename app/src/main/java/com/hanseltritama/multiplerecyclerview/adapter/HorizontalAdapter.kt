@@ -7,22 +7,27 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hanseltritama.multiplerecyclerview.R
-import com.hanseltritama.multiplerecyclerview.model.Characters
+import com.hanseltritama.multiplerecyclerview.model.Result
 
 class HorizontalAdapter : RecyclerView.Adapter<HorizontalAdapter.HorizontalViewHolder>() {
 
-    val items: List<Characters> = ArrayList()
+    private var items: MutableList<Result> = ArrayList()
 
     class HorizontalViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private val recyclerImage: ImageView = view.findViewById(R.id.rv_image_view)
 
-        fun bind(data: Characters) {
+        fun bind(data: Result) {
             Glide.with(recyclerImage.context)
-                .load(data.results[0].image)
+                .load(data.image)
                 .into(recyclerImage)
         }
 
+    }
+
+    fun setupData(data: ArrayList<Result>) {
+        this.items = data
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(
